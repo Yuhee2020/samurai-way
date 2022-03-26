@@ -11,12 +11,10 @@ function MyPosts() {
             <button>Remove</button>
         </div>
         <div className={s.posts}>
-            <Post/>
-            <Post/>
-            <Post/>
-            <Post/>
-            <Post/>
-            <Post/>
+            <Post message={"Hi, how are you?"} likesCount={20}/>
+            <Post message={"It is my first post"} likesCount={15}/>
+            <Post message={"Hello, who are you?"} likesCount={30}/>
+
         </div>
     </div>
 }
