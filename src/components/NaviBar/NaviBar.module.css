@@ -2,8 +2,20 @@
 nav {
     background-color: bisque;
     grid-area: n;
+    padding: 20px;
+    border-radius: 5px;
 }
 
-.item{
-    color: brown;
+.item a{
+text-decoration: none;
+    color: green;
+    font-size: 20px;
+    font-weight: bolder;
+
 }
+
+
+.item a.activeLink{
+    color: darkblue;
+}
+
