@@ -1,8 +1,15 @@
 .header {
-    background-color: green;
+    background-image: url("../../images/stock-photo-abstract-geometric-background-green-gradient.jpg");
     grid-area: h;
+    border: 6px solid #332;
+
+    color: #642;
+    font-size: 50px;
+
 }
 
+
+
 .header img {
-    width: 100px;
+    height: 100%;
 }

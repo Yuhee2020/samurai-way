@@ -3,15 +3,15 @@ import s from "./Profile.module.css"
 import MyPosts from "./MyPosts/MyPosts";
 
 function Profile() {
-    return <div>
-        <div>
-            <img className={s.profileImg}
-                 src="https://media-exp1.licdn.com/dms/image/C4D1BAQGDmALg_8s-Yg/company-background_10000/0/1519799119530?e=2147483647&v=beta&t=MpzHeo7wdMoePy-CjWNPwwMbgDU3ydtdqIXGYFtSisg"/>
-        </div>
+    return <div className={s.profile}>
         <div>
             ava+description
         </div>
         <MyPosts/>
+        <div>
+            <img className={s.profileImg}
+                 src="https://free-png.ru/wp-content/uploads/2021/12/free-png.ru-316.png"/>
+        </div>
     </div>
 }
 

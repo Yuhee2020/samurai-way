@@ -13,6 +13,7 @@ function App() {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
+
                 <Header/>
                 <NaviBar/>
                 <div className="app-wrapper-content">
@@ -21,8 +22,6 @@ function App() {
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
                     <Route path="/settings" component={Settings}/>
-
-
                 </div>
             </div>
         </BrowserRouter>);
