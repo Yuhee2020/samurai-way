@@ -1,0 +1,23 @@
+.dialogs{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    padding: 10px;
+}
+
+.users{
+
+}
+.users .active{
+    color:coral;
+}
+.user{
+
+}
+
+.messages{
+
+}
+
+.message{
+
+}
