@@ -1,23 +1,23 @@
 
 nav {
-    background-image: url("../../images/pngtree-floral-background-leaves-image_130831.jpg");
+    background-color: #fcf4eb;
     grid-area: n;
     padding: 20px;
-    border: 6px solid #332;
+
 
 
 }
 
-.item a{
-text-decoration: none;
-    color: #222;
+.item a {
+    text-decoration: none;
+    color: rgb(46, 147, 122);
     font-size: 20px;
     font-weight: bolder;
 
 }
 
 
-.item a.activeLink{
+.item a.activeLink {
     text-decoration: underline;
 }
 

@@ -2,11 +2,11 @@
 
 
     padding: 4% 4% 25% 4%;
-    background-image: url(images/derevo-struktura-doska.jpg);
+    background-color: #c8e8e0;
 
     display: grid;
-    width: auto;
-    margin: 0 auto;
+
+    margin: 2%;
     grid-template-areas:
     "h h"
     "n c";
@@ -18,10 +18,11 @@
 
 
 .app-wrapper-content {
-    background-color: lightgoldenrodyellow;
+    padding: 2%;
+    background-color: rgb(242, 242, 242);
     grid-area: c;
 
-    border: 6px solid #332;
+
 
 }
 
