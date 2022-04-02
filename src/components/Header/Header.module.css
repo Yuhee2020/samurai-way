@@ -1,15 +1,23 @@
 .header {
-    background-image: url("logo_size.jpg");
+    background-color: white;
     grid-area: h;
-
-
     color: #642;
-    font-size: 50px;
+    font-size: 70px;
+    position: relative;
+}
+
+.title {
+position: absolute;
+    top: 10%;
+    left: 40%;
 
 }
 
 
-
 .header img {
+
     height: 100%;
+    margin-left: 10px;
+
+
 }
