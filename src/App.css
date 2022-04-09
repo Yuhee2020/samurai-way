@@ -21,8 +21,10 @@
     padding: 2%;
     background-color: rgb(242, 242, 242);
     grid-area: c;
+}
 
-
+.profileImg {
+    width: 100%;
 
 }
 

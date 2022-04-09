@@ -8,6 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
+import s from "./components/Profile/Profile.module.css";
 
 function App() {
     return (
@@ -22,6 +23,11 @@ function App() {
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
                     <Route path="/settings" component={Settings}/>
+                    <div>
+                        <img className={s.profileImg}
+                             src="https://free-png.ru/wp-content/uploads/2021/12/free-png.ru-316.png"/>
+                    </div>
+
                 </div>
             </div>
         </BrowserRouter>);
