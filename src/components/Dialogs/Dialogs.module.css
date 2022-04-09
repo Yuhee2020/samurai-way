@@ -4,13 +4,21 @@
     padding: 10px;
 }
 
-.users{
+.dialogsItem{
 
 }
+
+.activeDialogs{
+    text-decoration: none;
+    font-weight: bold;
+}
+
 .users .active{
+
     color:coral;
 }
-.user{
+.dialog{
+    text-decoration: none;
 
 }
 
@@ -21,3 +29,46 @@
 .message{
 
 }
+/*
+.block{
+    display: flex;
+    align-items: flex-end;
+    margin: 10px;
+}
+
+.avatar{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.content {
+    padding: 10px;
+    border-radius: 5px 5px 5px 0px;
+    background-color: black;
+}
+
+.angle{
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(circle at 0 0, rgba(0,0,0,0) 15px, black 0);
+}
+
+.message{
+    min-width: 150px;
+    max-width: 300px;
+    word-wrap: break-word;
+    color:lime ;
+}
+
+.name {
+    font-size: 20px;
+    font-weight: bold;
+    color: violet;
+
+}
+.time{
+    display: flex;
+    justify-content: flex-end;
+    color: green;
+}*/
