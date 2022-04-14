@@ -7,7 +7,7 @@ type DialogProps={
     name:string
     id: number
 }
-type DialogsPropsType ={
+ export type DialogsPropsType ={
     dialogs: Array<DialogProps>
 }
 

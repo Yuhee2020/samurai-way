@@ -5,7 +5,7 @@ import { Message } from "./Message/Message";
 
 function Dialogs() {
 
-    const dialogs =[
+ /*   const dialogs =[
         {name:"Dimas",id:1},
         {name:"Dasha",id:2},
         {name:"Vania",id:3},
@@ -18,7 +18,7 @@ function Dialogs() {
         {id:2, message:"How are you?"},
         {id:3, message:"Where are you?"},
         {id:4, message:"Good bye!"}
-    ]
+    ]*/
 
     return <div className={s.dialogs}>
         <div className={s.dialogsItems}>

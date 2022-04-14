@@ -9,8 +9,9 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import s from "./components/Profile/Profile.module.css";
+import {Data} from "./index";
 
-function App() {
+function App(props:Data) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -18,7 +19,7 @@ function App() {
                 <Header/>
                 <NaviBar/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile" component={Profile}/>
+                    <Route path="/profile" element={<Profile/>}/>
                     <Route path="/dialogs" component={Dialogs}/>
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>

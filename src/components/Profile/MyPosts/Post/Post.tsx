@@ -6,7 +6,7 @@ type PostType = {
     message: string
     likesCount: number
 }
-type PostsPropsType = {
+export type PostsPropsType = {
     posts: Array<PostType>
 }
 

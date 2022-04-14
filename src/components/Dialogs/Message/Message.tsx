@@ -5,7 +5,7 @@ type MessageType = {
     message: string
     id: number
 }
-    type MessagePropsType={
+  export  type MessagePropsType={
     messages: Array<MessageType>
     }
 
