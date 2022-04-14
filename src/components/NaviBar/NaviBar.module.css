@@ -17,7 +17,7 @@
 }
 
 
-.item a.activeLink {
+.item .activeLink {
     color: black;
     text-decoration: none;
 }
