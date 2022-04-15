@@ -1,18 +1,21 @@
 import React from "react";
 import s from "../Dialogs.module.css";
 
-type MessageType = {
-    message: string
+export type MessageType={
     id: number
+    message: string
 }
-  export  type MessagePropsType={
+ export type MessagesType={
     messages: Array<MessageType>
-    }
+}
 
-export const Message = (props: MessagePropsType) => {
+
+
+
+export const Message = (props: MessagesType) => {
     return <div className={s.message}>
         {props.messages.map(el=>{
-            return <div>{el.message}</div>
+            return <div key={el.id}>{el.message}</div>
         })}
     </div>
 }
