@@ -18,7 +18,13 @@ function NaviBar() {
             <NavLink to="/music" activeClassName={s.activeLink}>Music</NavLink>
         </div>
         <div className={s.item}>
-            <NavLink to="settings" activeClassName={s.activeLink}>Settings</NavLink>
+            <NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink>
+        </div>
+        <div className={s.item}>
+            <NavLink to="/friends" activeClassName={s.activeLink}>
+                <h2 className={s.friends}>Friends</h2>
+            </NavLink>
+            <span>Vasia</span> <span>Dasha</span> <span>Dima</span>
         </div>
     </nav>
 }

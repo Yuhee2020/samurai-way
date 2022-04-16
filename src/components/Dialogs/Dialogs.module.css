@@ -30,6 +30,19 @@
 .message{
 
 }
+
+.item {
+    color: #222;
+}
+
+.dialog img{
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
+
+
+
 /*
 .block{
     display: flex;
