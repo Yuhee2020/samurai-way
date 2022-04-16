@@ -1,10 +1,8 @@
 import React from "react";
 import s from "../Dialogs.module.css";
+import {MessageType} from "../../../redux/state";
 
-export type MessageType={
-    id: number
-    message: string
-}
+
  export type MessagesType={
     messages: Array<MessageType>
 }

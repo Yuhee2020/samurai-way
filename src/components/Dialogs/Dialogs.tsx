@@ -1,25 +1,25 @@
 import s from "./Dialogs.module.css"
-import {Dialog, DialogType,} from "./Dialog/Dialog";
-import {Message, MessageType,} from "./Message/Message";
+import {Dialog,} from "./Dialog/Dialog";
+import {Message,} from "./Message/Message";
+import {DialogsPageType} from "../../redux/state";
 
 
-type DiMeType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
+type DialogsType={
+    dialogsPage: DialogsPageType
 }
 
 
-function Dialogs(props: DiMeType) {
+function Dialogs(props: DialogsType) {
 
 
     return <div className={s.dialogs}>
         <div className={s.dialogsItems}>
-            <Dialog dialogs={props.dialogs}/>
+            <Dialog dialogs={props.dialogsPage.dialogs}/>
 
 
         </div>
         <div className={s.messages}>
-            <Message messages={props.messages}/>
+            <Message messages={props.dialogsPage.messages}/>
 
 
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+
 
 
 export type PostType = {
@@ -19,17 +19,17 @@ export type MessageType = {
 export type ProfilePageType = {
     posts: Array<PostType>
 }
-export type MessagesPageType = {
+export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
 }
 
 export type StateType = {
     profilePage: ProfilePageType
-    messagesPage: MessagesPageType
+    dialogsPage: DialogsPageType
 }
 
-export let state: StateType = {
+export let state = {
     profilePage: {
         posts: [
             {id: 1, message: "Hi, how are you?", likesCount: 20},
@@ -37,7 +37,7 @@ export let state: StateType = {
             {id: 3, message: "Hello, who are you?", likesCount: 30}
         ],
     },
-    messagesPage: {
+    dialogsPage: {
         dialogs: [
             {name: "Dimas", id: 1},
             {name: "Dasha", id: 2},
