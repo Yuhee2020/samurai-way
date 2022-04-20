@@ -1,9 +1,14 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import s from "./NaviBar.module.css";
+import {FriendsType, naviBarPageType} from "../../redux/state";
+
+type NaviBarTypes={
+    naviBarPage: naviBarPageType
+}
 
 
-function NaviBar() {
+function NaviBar(props:NaviBarTypes) {
     return <nav className={s.nav}>
         <div className={s.item}>
             <NavLink to="/profile" activeClassName={s.activeLink}>Profile</NavLink>
@@ -24,7 +29,9 @@ function NaviBar() {
             <NavLink to="/friends" activeClassName={s.activeLink}>
                 <h2 className={s.friends}>Friends</h2>
             </NavLink>
-            <span>Vasia</span> <span>Dasha</span> <span>Dima</span>
+            {props.naviBarPage.friends.map((el)=>{
+                return <span key={el.id}> {el.name}  </span>
+            })}
         </div>
     </nav>
 }

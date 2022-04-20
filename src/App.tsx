@@ -12,23 +12,25 @@ import s from "./components/Profile/Profile.module.css";
 import {StateType} from "./redux/state";
 
 
-type State={
-    state:StateType
+type State = {
+    state: StateType
+    addPost: (postMessage: string) => void
 }
 
-function App(props:State) {
+function App(props: State) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
 
                 <Header/>
-                <NaviBar/>
+                <NaviBar naviBarPage={props.state.naviBarPage}/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile" render={()=><Profile profilePage={props.state.profilePage}/>}/>
-                    <Route path="/dialogs" render={()=><Dialogs dialogsPage={props.state.dialogsPage}  />}/>
-                    <Route path="/news" render={()=><News/>}/>
-                    <Route path="/music" render={()=><Music/>}/>
-                    <Route path="/settings" render={()=><Settings/>}/>
+                    <Route path="/profile" render={() => <Profile profilePage={props.state.profilePage}
+                                                                  addPost={props.addPost}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
+                    <Route path="/news" render={() => <News/>}/>
+                    <Route path="/music" render={() => <Music/>}/>
+                    <Route path="/settings" render={() => <Settings/>}/>
                     <div>
                         <img className={s.profileImg}
                              src="https://free-png.ru/wp-content/uploads/2021/12/free-png.ru-316.png"/>

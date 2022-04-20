@@ -1,4 +1,4 @@
-
+import {log} from "util";
 
 
 export type PostType = {
@@ -16,6 +16,16 @@ export type MessageType = {
     message: string
 }
 
+export type FriendsType = {
+    id: number
+    name: string
+}
+
+export type naviBarPageType= {
+    friends: Array<FriendsType>
+}
+
+
 export type ProfilePageType = {
     posts: Array<PostType>
 }
@@ -27,6 +37,13 @@ export type DialogsPageType = {
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
+    naviBarPage: naviBarPageType
+}
+
+
+export const addPost=(postMessage:string )=>{
+    let newPost: PostType={ id: 4, message: postMessage, likesCount:0 }
+    state.profilePage.posts.push(newPost)
 }
 
 export let state = {
@@ -51,5 +68,14 @@ export let state = {
             {id: 3, message: "Where are you?"},
             {id: 4, message: "Good bye!"}
         ]
-    }
+    },
+    naviBarPage: {
+        friends: [
+            {id: 1, name: "Vasia",},
+            {id: 2, name: "Dasha", },
+            {id: 3, name: "Dima", },
+
+        ],
+    },
 }
+console.log(state)

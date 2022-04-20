@@ -3,24 +3,40 @@ import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {PostType} from "../../../redux/state";
 
-type MyPostsType={
+type MyPostsType = {
     posts: Array<PostType>
+    addPost:(postMessage: string ) => void
 }
 
-function MyPosts(props:MyPostsType) {
+function MyPosts(props: MyPostsType) {
+
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
+
+    const addPost=()=>{
+        if (newPostElement.current) {
+            props.addPost(newPostElement.current.value)
+        }
+    }
+
     return <div>
-        My posts
+        <h3>My posts</h3>
         <div>
-            <textarea></textarea>
-            <button>Add post</button>
-            <button>Remove</button>
+            <div>
+                <textarea ref={newPostElement}></textarea>
+            </div>
+            <div>
+                <button onClick={addPost}>Add post</button>
+            </div>
+            <div>
+                <button>Remove</button>
+            </div>
         </div>
+
         <div className={s.posts}>
             <Post posts={props.posts}/>
-
-
-
         </div>
+
+
     </div>
 }
 
