@@ -1,4 +1,4 @@
-import {log} from "util";
+import {rerenderTree} from "../render";
 
 
 export type PostType = {
@@ -10,22 +10,17 @@ export type DialogsType = {
     name: string
     id: number
 }
-
 export type MessageType = {
     id: number
     message: string
 }
-
 export type FriendsType = {
     id: number
     name: string
 }
-
 export type naviBarPageType= {
     friends: Array<FriendsType>
 }
-
-
 export type ProfilePageType = {
     posts: Array<PostType>
 }
@@ -33,7 +28,6 @@ export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
 }
-
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
@@ -43,7 +37,8 @@ export type StateType = {
 
 export const addPost=(postMessage:string )=>{
     let newPost: PostType={ id: 4, message: postMessage, likesCount:0 }
-    state.profilePage.posts.push(newPost)
+    state.profilePage.posts.unshift(newPost)
+    rerenderTree(state)
 }
 
 export let state = {

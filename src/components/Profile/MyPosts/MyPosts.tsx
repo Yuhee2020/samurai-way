@@ -16,6 +16,7 @@ function MyPosts(props: MyPostsType) {
         if (newPostElement.current) {
             props.addPost(newPostElement.current.value)
         }
+        if (newPostElement.current) newPostElement.current.value=""
     }
 
     return <div>
