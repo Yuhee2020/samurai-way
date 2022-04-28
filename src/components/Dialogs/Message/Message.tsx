@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from "../Dialogs.module.css";
 import {MessageType} from "../../../redux/state";
 
@@ -10,20 +10,15 @@ export type MessagesType = {
     messageText: string
 }
 
-const newMessage= React.createRef<HTMLTextAreaElement>()
+
 
 export const Message = (props: MessagesType) => {
-
-    const OnChangeHandler=()=>{
-        let message= newMessage.current?.value
-        message && props.updateMessage(message)}
-
+    const onChangeHandler=(e:ChangeEvent<HTMLTextAreaElement>)=>{props.updateMessage(e.currentTarget.value)}
     return <div className={s.message}>
         {props.messages.map(el => {
             return <div key={el.id}>{el.message}</div>
         })}
-        <textarea onChange={OnChangeHandler}
-                  ref={newMessage}
+        <textarea onChange={onChangeHandler}
                   value={props.messageText}
         />
         <div>

@@ -1,5 +1,6 @@
-import {rerenderTree} from "../render";
+
 import {v1} from "uuid";
+
 
 
 export type PostType = {
@@ -38,28 +39,34 @@ export type StateType = {
     naviBarPage: naviBarPageType
 }
 
+let rerenderTree=()=>{
+}
+
+export const subscribe=(observer:()=>void)=>{
+rerenderTree=observer
+}
 
 export const addPost = () => {
     let newPost: PostType = {id: v1(), message: state.profilePage.newPostText, likesCount: 0}
     state.profilePage.posts.unshift(newPost)
     state.profilePage.newPostText=""
-    rerenderTree(state)
+    rerenderTree()
 }
 
 export const updateNewPostText=(newText:string)=>{
     state.profilePage.newPostText=newText
-    rerenderTree(state)
+    rerenderTree()
 }
 
 export const addMessage=()=>{
     let newMessage: MessageType= {id:v1() , message: state.dialogsPage.messageText }
     state.dialogsPage.messages.unshift(newMessage)
     state.dialogsPage.messageText=""
-    rerenderTree(state)
+    rerenderTree()
 }
 export const updateMessage=(newMessage:string)=> {
     state.dialogsPage.messageText = newMessage
-    rerenderTree(state)
+    rerenderTree()
 }
 
 export let state:StateType = {
