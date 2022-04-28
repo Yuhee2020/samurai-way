@@ -29,6 +29,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
+    messageText: string
 }
 export type StateType = {
     profilePage: ProfilePageType
@@ -49,6 +50,17 @@ export const updateNewPostText=(newText:string)=>{
     rerenderTree(state)
 }
 
+export const addMessage=()=>{
+    let newMessage: MessageType= {id:5 , message: state.dialogsPage.messageText }
+    state.dialogsPage.messages.unshift(newMessage)
+    state.dialogsPage.messageText=""
+    rerenderTree(state)
+}
+export const updateMessage=(newMessage:string)=> {
+    state.dialogsPage.messageText = newMessage
+    rerenderTree(state)
+}
+
 export let state:StateType = {
     profilePage: {
         posts: [
@@ -56,7 +68,7 @@ export let state:StateType = {
             {id: 2, message: "It is my first post", likesCount: 15},
             {id: 3, message: "Hello, who are you?", likesCount: 30}
         ],
-        newPostText: "Hello mutherfucker"
+        newPostText: ""
     },
     dialogsPage: {
         dialogs: [
@@ -71,7 +83,8 @@ export let state:StateType = {
             {id: 2, message: "How are you?"},
             {id: 3, message: "Where are you?"},
             {id: 4, message: "Good bye!"}
-        ]
+        ],
+        messageText: ""
     },
     naviBarPage: {
         friends: [
@@ -82,4 +95,4 @@ export let state:StateType = {
         ],
     },
 }
-console.log(state)
+console.log(state.dialogsPage.messages)

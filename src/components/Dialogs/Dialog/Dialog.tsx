@@ -6,6 +6,7 @@ import {DialogsType} from "../../../redux/state";
 
 type DialogType = {
     dialogs: Array<DialogsType>
+
 }
 
 

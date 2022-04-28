@@ -9,13 +9,15 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import s from "./components/Profile/Profile.module.css";
-import {StateType, updateNewPostText} from "./redux/state";
+import {addMessage, StateType, updateMessage, updateNewPostText} from "./redux/state";
 
 
 type State = {
     state: StateType
     addPost: () => void
     updateNewPostText:(newText:string)=>void
+    addMessage: ()=>void
+    updateMessage:(newMessage:string)=>void
 
 }
 
@@ -31,7 +33,9 @@ function App(props: State) {
                                                                   addPost={props.addPost}
                                                                   updateNewPostText={updateNewPostText}
                                                                   />}/>
-                    <Route path="/dialogs" render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs dialogsPage={props.state.dialogsPage}
+                                                                  addMessage={props.addMessage}
+                                                                  updateMessage={updateMessage}/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

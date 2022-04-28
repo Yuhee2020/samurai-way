@@ -4,8 +4,11 @@ import {Message,} from "./Message/Message";
 import {DialogsPageType} from "../../redux/state";
 
 
-type DialogsType={
+type DialogsType = {
     dialogsPage: DialogsPageType
+    addMessage: () => void
+    updateMessage: (newMessage: string) => void
+
 }
 
 
@@ -14,12 +17,17 @@ function Dialogs(props: DialogsType) {
 
     return <div className={s.dialogs}>
         <div className={s.dialogsItems}>
-            <Dialog dialogs={props.dialogsPage.dialogs}/>
+            <Dialog dialogs={props.dialogsPage.dialogs}
+            />
 
 
         </div>
         <div className={s.messages}>
-            <Message messages={props.dialogsPage.messages}/>
+            <Message messages={props.dialogsPage.messages}
+                     addMessage={props.addMessage}
+                     updateMessage={props.updateMessage}
+                     messageText={props.dialogsPage.messageText}
+            />
 
 
         </div>
