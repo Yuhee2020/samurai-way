@@ -1,21 +1,22 @@
 import {rerenderTree} from "../render";
+import {v1} from "uuid";
 
 
 export type PostType = {
-    id: number
+    id: string
     message: string
     likesCount: number
 }
 export type DialogsType = {
     name: string
-    id: number
+    id: string
 }
 export type MessageType = {
-    id: number
+    id: string
     message: string
 }
 export type FriendsType = {
-    id: number
+    id: string
     name: string
 }
 export type naviBarPageType = {
@@ -39,7 +40,7 @@ export type StateType = {
 
 
 export const addPost = () => {
-    let newPost: PostType = {id: 4, message: state.profilePage.newPostText, likesCount: 0}
+    let newPost: PostType = {id: v1(), message: state.profilePage.newPostText, likesCount: 0}
     state.profilePage.posts.unshift(newPost)
     state.profilePage.newPostText=""
     rerenderTree(state)
@@ -51,7 +52,7 @@ export const updateNewPostText=(newText:string)=>{
 }
 
 export const addMessage=()=>{
-    let newMessage: MessageType= {id:5 , message: state.dialogsPage.messageText }
+    let newMessage: MessageType= {id:v1() , message: state.dialogsPage.messageText }
     state.dialogsPage.messages.unshift(newMessage)
     state.dialogsPage.messageText=""
     rerenderTree(state)
@@ -64,33 +65,33 @@ export const updateMessage=(newMessage:string)=> {
 export let state:StateType = {
     profilePage: {
         posts: [
-            {id: 1, message: "Hi, how are you?", likesCount: 20},
-            {id: 2, message: "It is my first post", likesCount: 15},
-            {id: 3, message: "Hello, who are you?", likesCount: 30}
+            {id: v1(), message: "Hi, how are you?", likesCount: 20},
+            {id: v1(), message: "It is my first post", likesCount: 15},
+            {id: v1(), message: "Hello, who are you?", likesCount: 30}
         ],
         newPostText: ""
     },
     dialogsPage: {
         dialogs: [
-            {name: "Dimas", id: 1},
-            {name: "Dasha", id: 2},
-            {name: "Vania", id: 3},
-            {name: "Valera", id: 4},
-            {name: "Irina", id: 5},
+            {name: "Dimas", id: v1()},
+            {name: "Dasha", id: v1()},
+            {name: "Vania", id: v1()},
+            {name: "Valera", id: v1()},
+            {name: "Irina", id: v1()},
         ],
         messages: [
-            {id: 1, message: "Hello"},
-            {id: 2, message: "How are you?"},
-            {id: 3, message: "Where are you?"},
-            {id: 4, message: "Good bye!"}
+            {id: v1(), message: "Hello"},
+            {id: v1(), message: "How are you?"},
+            {id: v1(), message: "Where are you?"},
+            {id: v1(), message: "Good bye!"}
         ],
         messageText: ""
     },
     naviBarPage: {
         friends: [
-            {id: 1, name: "Vasia",},
-            {id: 2, name: "Dasha",},
-            {id: 3, name: "Dima",},
+            {id: v1(), name: "Vasia",},
+            {id: v1(), name: "Dasha",},
+            {id: v1(), name: "Dima",},
 
         ],
     },
