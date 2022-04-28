@@ -9,12 +9,14 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import s from "./components/Profile/Profile.module.css";
-import {StateType} from "./redux/state";
+import {StateType, updateNewPostText} from "./redux/state";
 
 
 type State = {
     state: StateType
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    updateNewPostText:(newText:string)=>void
+
 }
 
 function App(props: State) {
@@ -26,7 +28,9 @@ function App(props: State) {
                 <NaviBar naviBarPage={props.state.naviBarPage}/>
                 <div className="app-wrapper-content">
                     <Route path="/profile" render={() => <Profile profilePage={props.state.profilePage}
-                                                                  addPost={props.addPost}/>}/>
+                                                                  addPost={props.addPost}
+                                                                  updateNewPostText={updateNewPostText}
+                                                                  />}/>
                     <Route path="/dialogs" render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>

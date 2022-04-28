@@ -18,11 +18,13 @@ export type FriendsType = {
     id: number
     name: string
 }
-export type naviBarPageType= {
+export type naviBarPageType = {
     friends: Array<FriendsType>
 }
 export type ProfilePageType = {
     posts: Array<PostType>
+    newPostText:string
+
 }
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
@@ -35,19 +37,26 @@ export type StateType = {
 }
 
 
-export const addPost=(postMessage:string )=>{
-    let newPost: PostType={ id: 4, message: postMessage, likesCount:0 }
+export const addPost = () => {
+    let newPost: PostType = {id: 4, message: state.profilePage.newPostText, likesCount: 0}
     state.profilePage.posts.unshift(newPost)
+    state.profilePage.newPostText=""
     rerenderTree(state)
 }
 
-export let state = {
+export const updateNewPostText=(newText:string)=>{
+    state.profilePage.newPostText=newText
+    rerenderTree(state)
+}
+
+export let state:StateType = {
     profilePage: {
         posts: [
             {id: 1, message: "Hi, how are you?", likesCount: 20},
             {id: 2, message: "It is my first post", likesCount: 15},
             {id: 3, message: "Hello, who are you?", likesCount: 30}
         ],
+        newPostText: "Hello mutherfucker"
     },
     dialogsPage: {
         dialogs: [
@@ -67,8 +76,8 @@ export let state = {
     naviBarPage: {
         friends: [
             {id: 1, name: "Vasia",},
-            {id: 2, name: "Dasha", },
-            {id: 3, name: "Dima", },
+            {id: 2, name: "Dasha",},
+            {id: 3, name: "Dima",},
 
         ],
     },
