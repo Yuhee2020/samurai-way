@@ -10,23 +10,23 @@ type NaviBarTypes={
 
 function NaviBar(props:NaviBarTypes) {
     return <nav className={s.nav}>
-        <div className={s.item}>
-            <NavLink to="/profile" activeClassName={s.activeLink}>Profile</NavLink>
+        <div >
+            <NavLink to="/profile" className={({isActive})=>isActive? s.activeLink: s.item}>Profile</NavLink>
         </div>
-        <div className={s.item}>
-            <NavLink to="/dialogs" activeClassName={s.activeLink}>Messages</NavLink>
+        <div >
+            <NavLink to="/dialogs" className={({isActive})=>isActive? s.activeLink: s.item}>Messages</NavLink>
         </div>
-        <div className={s.item}>
-            <NavLink to="/news" activeClassName={s.activeLink}>News</NavLink>
+        <div >
+            <NavLink to="/news" className={({isActive})=>isActive? s.activeLink: s.item}>News</NavLink>
         </div>
-        <div className={s.item}>
-            <NavLink to="/music" activeClassName={s.activeLink}>Music</NavLink>
+        <div >
+            <NavLink to="/music" className={({isActive})=>isActive? s.activeLink:s.item}>Music</NavLink>
         </div>
-        <div className={s.item}>
-            <NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink>
+        <div >
+            <NavLink to="/settings" className={({isActive})=>isActive? s.activeLink:s.item}>Settings</NavLink>
         </div>
-        <div className={s.item}>
-            <NavLink to="/friends" activeClassName={s.activeLink}>
+        <div >
+            <NavLink to="/friends" className={({isActive})=>isActive? s.activeLink: s.item}>
                 <h2 className={s.friends}>Friends</h2>
             </NavLink>
             {props.naviBarPage.friends.map((el)=>{
