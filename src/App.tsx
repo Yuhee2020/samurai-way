@@ -9,34 +9,30 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import s from "./components/Profile/Profile.module.css";
-import {StateType, updateMessage, updateNewPostText} from "./redux/state";
+import {StoreType,} from "./redux/state";
 
 
-type State = {
-    state: StateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    addMessage: () => void
-    updateMessage: (newMessage: string) => void
-
+type PropsType = {
+    store: StoreType
 }
 
-function App(props: State) {
+const App: React.FC<PropsType>=(props)=> {
+    const state=props.store.getSate()
     return (
         <BrowserRouter>
             <div className="app-wrapper">
 
                 <Header/>
-                <NaviBar naviBarPage={props.state.naviBarPage}/>
+                <NaviBar naviBarPage={state.naviBarPage}/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path="/profile" element={<Profile profilePage={props.state.profilePage}
-                                                                 addPost={props.addPost}
-                                                                 updateNewPostText={updateNewPostText}
+                        <Route path="/profile" element={<Profile profilePage={state.profilePage}
+                                                                 addPost={props.store.addPost.bind(props.store)}
+                                                                 updateNewPostText={props.store.updateNewPostText.bind(props.store)}
                         />}/>
-                        <Route path="/dialogs" element={<Dialogs dialogsPage={props.state.dialogsPage}
-                                                                 addMessage={props.addMessage}
-                                                                 updateMessage={updateMessage}/>}/>
+                        <Route path="/dialogs" element={<Dialogs dialogsPage={state.dialogsPage}
+                                                                 addMessage={props.store.addMessage.bind(props.store)}
+                                                                 updateMessage={props.store.updateMessage.bind(props.store)}/>}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>
                         <Route path="/settings" element={<Settings/>}/>
