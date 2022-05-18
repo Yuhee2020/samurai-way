@@ -40,30 +40,18 @@ export type StateType = {
 
 export type StoreType = {
     _state: StateType
-    updateMessage: (newMessage: string)=>void
-    addMessage:()=>void
-    updateNewPostText:(newText: string)=>void
-    addPost:()=>void
+    // updateMessage: (newMessage: string)=>void
+    // addMessage:()=>void
+    // updateNewPostText:(newText: string)=>void
+    // addPost:()=>void
     rerenderTree:()=>void
     subscribe:(observer: () => void)=>void
     getSate:()=>StateType
-    dispatch: (action:UpdateMessageType | addMessageType | updateNewPostTextType | addPostType)=>void
+    dispatch: (action:ActionsTypes)=>void
 }
 
-type UpdateMessageType={
-    type: "UPDATE-MESSAGE",
-    newMessage: string
-}
-type addMessageType={
-    type: "ADD-MESSAGE",
-}
-type updateNewPostTextType={
-    type: "UPDATE-NEW-POST-TEXT",
-    newText: string
-}
-type addPostType={
-    type: "ADD-POST",
-}
+export type ActionsTypes= updateMessageACType | addMessageACType | updateNewPostTextACType | addPostACType
+
 
 
 
@@ -102,26 +90,26 @@ export let store: StoreType = {
             ],
         },
     },
-    updateMessage(newMessage: string){
-        this._state.dialogsPage.messageText = newMessage
-        this.rerenderTree()
-    },
-    addMessage(){
-        let newMessage: MessageType = {id: v1(), message: this._state.dialogsPage.messageText}
-        this._state.dialogsPage.messages.unshift(newMessage)
-        this._state.dialogsPage.messageText = ""
-        this.rerenderTree()
-    },
-    updateNewPostText(newText: string){
-        this._state.profilePage.newPostText = newText
-        this.rerenderTree()
-    },
-    addPost(){
-        let newPost: PostType = {id: v1(), message: this._state.profilePage.newPostText, likesCount: 0}
-        this._state.profilePage.posts.unshift(newPost)
-        this._state.profilePage.newPostText = ""
-        this.rerenderTree()
-    },
+    // updateMessage(newMessage: string){
+    //     this._state.dialogsPage.messageText = newMessage
+    //     this.rerenderTree()
+    // },
+    // addMessage(){
+    //     let newMessage: MessageType = {id: v1(), message: this._state.dialogsPage.messageText}
+    //     this._state.dialogsPage.messages.unshift(newMessage)
+    //     this._state.dialogsPage.messageText = ""
+    //     this.rerenderTree()
+    // },
+    // updateNewPostText(newText: string){
+    //     this._state.profilePage.newPostText = newText
+    //     this.rerenderTree()
+    // },
+    // addPost(){
+    //     let newPost: PostType = {id: v1(), message: this._state.profilePage.newPostText, likesCount: 0}
+    //     this._state.profilePage.posts.unshift(newPost)
+    //     this._state.profilePage.newPostText = ""
+    //     this.rerenderTree()
+    // },
     rerenderTree(){
     },
     subscribe(observer){
@@ -153,4 +141,36 @@ export let store: StoreType = {
         }
     }
 
+}
+
+type updateMessageACType=ReturnType<typeof updateMessageAC>
+export const updateMessageAC=(newMessage:string)=>{
+    return{
+        type: "UPDATE-MESSAGE",
+        newMessage: newMessage
+    }as const
+}
+
+type addMessageACType=ReturnType<typeof addMessageAC>
+export const addMessageAC=()=>{
+    return{
+        type: "ADD-MESSAGE"
+
+    }as const
+}
+
+type updateNewPostTextACType=ReturnType<typeof updateNewPostTextAC>
+export const updateNewPostTextAC=(newText:string)=>{
+    return{
+        type: "UPDATE-NEW-POST-TEXT",
+        newText: newText
+    }as const
+}
+
+type addPostACType=ReturnType<typeof addPostAC>
+export const addPostAC=()=>{
+    return{
+        type: "ADD-POST"
+
+    }as const
 }

@@ -1,13 +1,14 @@
 import s from "./Dialogs.module.css"
 import {Dialog,} from "./Dialog/Dialog";
 import {Message,} from "./Message/Message";
-import {DialogsPageType} from "../../redux/state";
+import {ActionsTypes, DialogsPageType} from "../../redux/state";
 
 
 type DialogsType = {
     dialogsPage: DialogsPageType
-    addMessage: () => void
-    updateMessage: (newMessage: string) => void
+    dispatch: (action: ActionsTypes)=>void
+    // addMessage: () => void
+    // updateMessage: (newMessage: string) => void
 
 }
 
@@ -24,9 +25,10 @@ function Dialogs(props: DialogsType) {
         </div>
         <div className={s.messages}>
             <Message messages={props.dialogsPage.messages}
-                     addMessage={props.addMessage}
-                     updateMessage={props.updateMessage}
+                     // addMessage={props.addMessage}
+                     // updateMessage={props.updateMessage}
                      messageText={props.dialogsPage.messageText}
+                     dispatch={props.dispatch}
             />
 
 

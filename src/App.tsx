@@ -19,7 +19,7 @@ type PropsType = {
 const App: React.FC<PropsType>=(props)=> {
     const state=props.store.getSate()
     return (
-        <BrowserRouter>
+
             <div className="app-wrapper">
 
                 <Header/>
@@ -27,12 +27,15 @@ const App: React.FC<PropsType>=(props)=> {
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route path="/profile" element={<Profile profilePage={state.profilePage}
-                                                                 addPost={props.store.addPost.bind(props.store)}
-                                                                 updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                                                                 dispatch={props.store.dispatch.bind(props.store)}
+                                                                 // addPost={props.store.addPost.bind(props.store)}
+                                                                 // updateNewPostText={props.store.updateNewPostText.bind(props.store)}
                         />}/>
                         <Route path="/dialogs" element={<Dialogs dialogsPage={state.dialogsPage}
-                                                                 addMessage={props.store.addMessage.bind(props.store)}
-                                                                 updateMessage={props.store.updateMessage.bind(props.store)}/>}/>
+                                                                 dispatch={props.store.dispatch.bind(props.store)}
+                                                                 // addMessage={props.store.addMessage.bind(props.store)}
+                                                                 // updateMessage={props.store.updateMessage.bind(props.store)}
+                        />}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>
                         <Route path="/settings" element={<Settings/>}/>
@@ -45,7 +48,7 @@ const App: React.FC<PropsType>=(props)=> {
 
                 </div>
             </div>
-        </BrowserRouter>);
+        );
 }
 
 export default App;

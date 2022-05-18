@@ -3,12 +3,14 @@ import './index.css';
 import {store} from "./redux/state";
 import App from "./App";
 import ReactDOM from 'react-dom';
+import {BrowserRouter} from "react-router-dom";
 
 
 const rerenderTree = () => {
     ReactDOM.render(
+        <BrowserRouter>
         <App store={store}/>,
-        document.getElementById('root')
+        </BrowserRouter>, document.getElementById('root')
     );
 }
 
