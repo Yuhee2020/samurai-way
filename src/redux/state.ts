@@ -47,8 +47,25 @@ export type StoreType = {
     rerenderTree:()=>void
     subscribe:(observer: () => void)=>void
     getSate:()=>StateType
-
+    dispatch: (action:UpdateMessageType | addMessageType | updateNewPostTextType | addPostType)=>void
 }
+
+type UpdateMessageType={
+    type: "UPDATE-MESSAGE",
+    newMessage: string
+}
+type addMessageType={
+    type: "ADD-MESSAGE",
+}
+type updateNewPostTextType={
+    type: "UPDATE-NEW-POST-TEXT",
+    newText: string
+}
+type addPostType={
+    type: "ADD-POST",
+}
+
+
 
 export let store: StoreType = {
     _state: {
@@ -113,8 +130,27 @@ export let store: StoreType = {
     getSate(){
         return this._state
     },
-
-
-
+    dispatch(action){
+        if (action.type==="UPDATE-MESSAGE"){
+            this._state.dialogsPage.messageText =action.newMessage
+            this.rerenderTree()
+        }
+        if (action.type==="ADD-MESSAGE"){
+            let newMessage: MessageType = {id: v1(), message: this._state.dialogsPage.messageText}
+            this._state.dialogsPage.messages.unshift(newMessage)
+            this._state.dialogsPage.messageText = ""
+            this.rerenderTree()
+        }
+        if(action.type==="UPDATE-NEW-POST-TEXT"){
+            this._state.profilePage.newPostText = action.newText
+            this.rerenderTree()
+        }
+        if (action.type==="ADD-POST"){
+            let newPost: PostType = {id: v1(), message: this._state.profilePage.newPostText, likesCount: 0}
+            this._state.profilePage.posts.unshift(newPost)
+            this._state.profilePage.newPostText = ""
+            this.rerenderTree()
+        }
+    }
 
 }
