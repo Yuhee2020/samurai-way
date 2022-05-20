@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {addPostACType, profileReducer, updateNewPostTextACType} from "./profileReducer";
+import {addMessageACType, dialogsReducer, updateMessageACType} from "./dialogsReducer";
 
 
 export type PostType = {
@@ -90,26 +92,6 @@ export let store: StoreType = {
             ],
         },
     },
-    // updateMessage(newMessage: string){
-    //     this._state.dialogsPage.messageText = newMessage
-    //     this.rerenderTree()
-    // },
-    // addMessage(){
-    //     let newMessage: MessageType = {id: v1(), message: this._state.dialogsPage.messageText}
-    //     this._state.dialogsPage.messages.unshift(newMessage)
-    //     this._state.dialogsPage.messageText = ""
-    //     this.rerenderTree()
-    // },
-    // updateNewPostText(newText: string){
-    //     this._state.profilePage.newPostText = newText
-    //     this.rerenderTree()
-    // },
-    // addPost(){
-    //     let newPost: PostType = {id: v1(), message: this._state.profilePage.newPostText, likesCount: 0}
-    //     this._state.profilePage.posts.unshift(newPost)
-    //     this._state.profilePage.newPostText = ""
-    //     this.rerenderTree()
-    // },
     rerenderTree(){
     },
     subscribe(observer){
@@ -119,58 +101,16 @@ export let store: StoreType = {
         return this._state
     },
     dispatch(action){
-        if (action.type==="UPDATE-MESSAGE"){
-            this._state.dialogsPage.messageText =action.newMessage
-            this.rerenderTree()
-        }
-        if (action.type==="ADD-MESSAGE"){
-            let newMessage: MessageType = {id: v1(), message: this._state.dialogsPage.messageText}
-            this._state.dialogsPage.messages.unshift(newMessage)
-            this._state.dialogsPage.messageText = ""
-            this.rerenderTree()
-        }
-        if(action.type==="UPDATE-NEW-POST-TEXT"){
-            this._state.profilePage.newPostText = action.newText
-            this.rerenderTree()
-        }
-        if (action.type==="ADD-POST"){
-            let newPost: PostType = {id: v1(), message: this._state.profilePage.newPostText, likesCount: 0}
-            this._state.profilePage.posts.unshift(newPost)
-            this._state.profilePage.newPostText = ""
-            this.rerenderTree()
-        }
+
+        this._state.profilePage= profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage= dialogsReducer(this._state.dialogsPage, action)
+
+        this.rerenderTree()
+
+
+
+
     }
 
 }
 
-type updateMessageACType=ReturnType<typeof updateMessageAC>
-export const updateMessageAC=(newMessage:string)=>{
-    return{
-        type: "UPDATE-MESSAGE",
-        newMessage: newMessage
-    }as const
-}
-
-type addMessageACType=ReturnType<typeof addMessageAC>
-export const addMessageAC=()=>{
-    return{
-        type: "ADD-MESSAGE"
-
-    }as const
-}
-
-type updateNewPostTextACType=ReturnType<typeof updateNewPostTextAC>
-export const updateNewPostTextAC=(newText:string)=>{
-    return{
-        type: "UPDATE-NEW-POST-TEXT",
-        newText: newText
-    }as const
-}
-
-type addPostACType=ReturnType<typeof addPostAC>
-export const addPostAC=()=>{
-    return{
-        type: "ADD-POST"
-
-    }as const
-}
