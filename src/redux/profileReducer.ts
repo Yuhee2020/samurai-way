@@ -1,7 +1,7 @@
 import {v1} from "uuid";
-import {ActionsTypes, PostType} from "./state";
+import {ActionsTypes, PostType, ProfilePageType} from "./state";
 
-export const profileReducer=(state: any, action: ActionsTypes)=>{
+export const profileReducer=(state: ProfilePageType, action: ActionsTypes)=>{
     switch (action.type){
         case "UPDATE-NEW-POST-TEXT":{
            state.newPostText = action.newText

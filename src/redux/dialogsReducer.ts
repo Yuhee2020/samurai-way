@@ -1,7 +1,7 @@
 import {v1} from "uuid";
-import {ActionsTypes, MessageType} from "./state";
+import {ActionsTypes, DialogsPageType, MessageType} from "./state";
 
-export const dialogsReducer=(state:any, action:ActionsTypes )=>{
+export const dialogsReducer=(state:DialogsPageType, action:ActionsTypes )=>{
     switch (action.type){
         case "UPDATE-MESSAGE":{
             state.messageText =action.newMessage
