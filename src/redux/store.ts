@@ -48,7 +48,7 @@ export type StoreType = {
     // addPost:()=>void
     rerenderTree:()=>void
     subscribe:(observer: () => void)=>void
-    getSate:()=>StateType
+    getState:()=>StateType
     dispatch: (action:ActionsTypes)=>void
 }
 
@@ -97,7 +97,7 @@ export let store: StoreType = {
     subscribe(observer){
         this.rerenderTree = observer
     },
-    getSate(){
+    getState(){
         return this._state
     },
     dispatch(action){

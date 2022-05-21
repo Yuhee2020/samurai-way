@@ -9,15 +9,16 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import s from "./components/Profile/Profile.module.css";
-import {StoreType,} from "./redux/state";
+import {StoreType,} from "./redux/store";
+import {ReduxStoreType} from "./redux/reduxStore";
 
 
 type PropsType = {
-    store: StoreType
+    store: ReduxStoreType
 }
 
 const App: React.FC<PropsType>=(props)=> {
-    const state=props.store.getSate()
+    const state=props.store.getState()
     return (
 
             <div className="app-wrapper">
@@ -28,13 +29,13 @@ const App: React.FC<PropsType>=(props)=> {
                     <Routes>
                         <Route path="/profile" element={<Profile profilePage={state.profilePage}
                                                                  dispatch={props.store.dispatch.bind(props.store)}
-                                                                 // addPost={props.store.addPost.bind(props.store)}
-                                                                 // updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                                                                 // addPost={props.store.ts.addPost.bind(props.store.ts)}
+                                                                 // updateNewPostText={props.store.ts.updateNewPostText.bind(props.store.ts)}
                         />}/>
                         <Route path="/dialogs" element={<Dialogs dialogsPage={state.dialogsPage}
                                                                  dispatch={props.store.dispatch.bind(props.store)}
-                                                                 // addMessage={props.store.addMessage.bind(props.store)}
-                                                                 // updateMessage={props.store.updateMessage.bind(props.store)}
+                                                                 // addMessage={props.store.ts.addMessage.bind(props.store.ts)}
+                                                                 // updateMessage={props.store.ts.updateMessage.bind(props.store.ts)}
                         />}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>

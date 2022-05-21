@@ -1,7 +1,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import s from "./NaviBar.module.css";
-import {FriendsType, naviBarPageType} from "../../redux/state";
+import {FriendsType, naviBarPageType} from "../../redux/store";
 
 type NaviBarTypes={
     naviBarPage: naviBarPageType

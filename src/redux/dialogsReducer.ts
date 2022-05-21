@@ -1,7 +1,23 @@
 import {v1} from "uuid";
-import {ActionsTypes, DialogsPageType, MessageType} from "./state";
+import {ActionsTypes, DialogsPageType, MessageType} from "./store";
 
-export const dialogsReducer=(state:DialogsPageType, action:ActionsTypes )=>{
+let initialState={
+    dialogs: [
+        {name: "Dimas", id: v1()},
+        {name: "Dasha", id: v1()},
+        {name: "Vania", id: v1()},
+        {name: "Valera", id: v1()},
+        {name: "Irina", id: v1()},
+    ],
+    messages: [
+        {id: v1(), message: "Hello"},
+        {id: v1(), message: "How are you?"},
+        {id: v1(), message: "Where are you?"},
+        {id: v1(), message: "Good bye!"}
+    ],
+    messageText: ""
+}
+export const dialogsReducer=(state:DialogsPageType = initialState, action:ActionsTypes )=>{
     switch (action.type){
         case "UPDATE-MESSAGE":{
             state.messageText =action.newMessage

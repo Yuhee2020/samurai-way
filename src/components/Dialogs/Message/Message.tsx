@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import s from "../Dialogs.module.css";
-import {ActionsTypes, MessageType} from "../../../redux/state";
+import {ActionsTypes, MessageType} from "../../../redux/store";
 import {addMessageAC, updateMessageAC} from "../../../redux/dialogsReducer";
 
 

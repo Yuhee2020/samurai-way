@@ -1,9 +1,18 @@
-import {naviBarPageType} from "./state";
+import {naviBarPageType} from "./store";
+import {v1} from "uuid";
 
-export const naviBarReducer=(state:naviBarPageType, action: any)=>{
+let initialState={
+    friends: [
+        {id: v1(), name: "Vasia",},
+        {id: v1(), name: "Dasha",},
+        {id: v1(), name: "Dima",},
+
+    ],
+}
+export const naviBarReducer=(state:naviBarPageType=initialState, action: any)=>{
     switch (action.type){
         case "XXX":{
             return state
-        }
+        }default: return state
     }
 }
