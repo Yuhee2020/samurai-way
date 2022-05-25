@@ -55,6 +55,7 @@ export type StoreType = {
 export type ActionsTypes= updateMessageACType | addMessageACType | updateNewPostTextACType | addPostACType
 
 
+/*
 
 
 export let store: StoreType = {
@@ -113,4 +114,5 @@ export let store: StoreType = {
     }
 
 }
+*/
 
