@@ -1,31 +1,28 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {ActionsTypes, PostType,} from "../../../redux/store";
+import {ProfilePageType,} from "../../../redux/store";
 import {addPostAC, updateNewPostTextAC} from "../../../redux/profileReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {ReducersStateType} from "../../../redux/reduxStore";
 
-type MyPostsType = {
-    posts: Array<PostType>
-    // addPost: () => void
-    newPostText: string
-    // updateNewPostText: (newText: string) => void
-    dispatch: (action: ActionsTypes) => void
-}
 
-function MyPosts(props: MyPostsType) {
+function MyPosts() {
+    let profilePage=useSelector<ReducersStateType, ProfilePageType>(state=>state.profilePage)
+    let dispatch=useDispatch()
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewPostTextAC(e.currentTarget.value))
-        // props.updateNewPostText(e.currentTarget.value)
+        dispatch(updateNewPostTextAC(e.currentTarget.value))
+
     }
     const onClickHandler=()=>{
-        props.dispatch(addPostAC())
+        dispatch(addPostAC())
     }
     return <div>
         <h3>My posts</h3>
         <div>
             <div>
                 <textarea onChange={onPostChange}
-                          value={props.newPostText}/>
+                          value={profilePage.newPostText}/>
             </div>
             <div>
                 <button onClick={onClickHandler}>Add post</button>
@@ -36,7 +33,7 @@ function MyPosts(props: MyPostsType) {
         </div>
 
         <div className={s.posts}>
-            <Post posts={props.posts}/>
+            <Post posts={profilePage.posts}/>
         </div>
 
 

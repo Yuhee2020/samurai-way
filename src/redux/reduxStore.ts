@@ -4,6 +4,7 @@ import {naviBarReducer} from "./naviBarReducer";
 import {profileReducer} from "./profileReducer";
 import {ActionsTypes, StateType} from "./store";
 
+export type ReducersStateType=ReturnType<typeof reducers>
 let reducers= combineReducers({
     dialogsPage:dialogsReducer,
     profilePage:profileReducer,
