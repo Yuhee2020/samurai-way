@@ -14,7 +14,7 @@ export const Users = () => {
                 return (<div className={s.user} key={el.id}>
                         <span><img src={el.photo} className={s.photo}/></span>
                         <span>{el.name}</span> <span>{el.status}</span>
-                        <span>{el.location.city} {el.location.country}</span>
+                        <div className={s.location}>{el.location.city} {el.location.country}</div>
                         {el.followed
                             ? <div>
                                 <button onClick={()=>dispatch(UnFollowAC(el.id))}>unfollowed</button>
