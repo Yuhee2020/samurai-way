@@ -24,3 +24,6 @@ export type ReduxStoreType = {
     getState:()=>StateType
     dispatch: (action:ActionsTypes)=>void
 }
+
+// @ts-ignore
+window.store=store

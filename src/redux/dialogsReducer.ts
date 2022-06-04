@@ -17,16 +17,13 @@ let initialState={
     ],
     messageText: ""
 }
-export const dialogsReducer=(state:DialogsPageType = initialState, action:ActionsTypes )=>{
+export const dialogsReducer=(state:DialogsPageType = initialState, action:ActionsTypes ):DialogsPageType=>{
     switch (action.type){
         case "UPDATE-MESSAGE":{
-            state.messageText =action.newMessage
-            return state
+            return {...state, messageText: action.newMessage}
         }case "ADD-MESSAGE": {
             let newMessage: MessageType = {id: v1(), message: state.messageText}
-            state.messages.unshift(newMessage)
-            state.messageText = ""
-            return state
+            return {...state, messages:[ newMessage,...state.messages,], messageText: ""}
         }default: return state
     }
 }
