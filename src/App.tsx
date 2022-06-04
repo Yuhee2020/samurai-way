@@ -9,9 +9,10 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import s from "./components/Profile/Profile.module.css";
+import {Users} from "./components/Users/Users";
 
 
-const App: React.FC=(props)=> {
+const App: React.FC=()=> {
     return (
 
             <div className="app-wrapper">
@@ -23,6 +24,7 @@ const App: React.FC=(props)=> {
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/dialogs" element={<Dialogs/>}/>
                         <Route path="/news" element={<News/>}/>
+                        <Route path="/users" element={<Users/>}/>
                         <Route path="/music" element={<Music/>}/>
                         <Route path="/settings" element={<Settings/>}/>
                         <Route path="/*" element={<div>404</div>}/>

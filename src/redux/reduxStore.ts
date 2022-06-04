@@ -3,12 +3,14 @@ import {dialogsReducer} from "./dialogsReducer";
 import {naviBarReducer} from "./naviBarReducer";
 import {profileReducer} from "./profileReducer";
 import {ActionsTypes, StateType} from "./store";
+import {usersReducer} from "./usersReduser";
 
 export type ReducersStateType=ReturnType<typeof reducers>
 let reducers= combineReducers({
     dialogsPage:dialogsReducer,
     profilePage:profileReducer,
-    naviBarPage:naviBarReducer
+    naviBarPage:naviBarReducer,
+    usersPage:usersReducer
 })
 export let store = createStore(reducers)
 
