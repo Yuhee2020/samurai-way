@@ -11,17 +11,19 @@ export const Users = () => {
 
     let usersPage = useSelector<ReducersStateType, UsersPageType>(state => state.usersPage)
     let dispatch = useDispatch()
+    const getUsers=()=>{
     if (usersPage.users.length ===0) {
 
         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {debugger
         dispatch(SetUsersAC(
            response.data.items))
         })
-    }
+    }}
     // axios.get("https://social-network.samuraijs.com/api/1.0/users")
 
     return (
         <div>
+            <button onClick={getUsers}>get users</button>
             {usersPage.users.map(el => {
                 return (<div className={s.user} key={el.id}>
                         <span><img src={el.photos.small!=null? el.photos.small: userPhoto} className={s.photo}/></span>
