@@ -1,38 +1,40 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {ReducersStateType} from "../../redux/reduxStore";
-import {FollowAC, SetUsersAC, UnFollowAC, UsersPageType} from "../../redux/usersReduser";
+import {UserType} from "../../redux/usersReduser";
 import s from "./Users.module.css"
 import axios from "axios";
 import userPhoto from "../../images/1B3916437-oom-110518-depp-10a.webp"
 
-export const Users = () => {
+type PropsType={
+    users: UserType[]
+    unfollow: (id: string)=>void
+    follow: (id: string)=>void
+    setUsers: (users: UserType[])=>void
 
-    let usersPage = useSelector<ReducersStateType, UsersPageType>(state => state.usersPage)
-    let dispatch = useDispatch()
+}
+
+export const Users2 = (props:PropsType) => {
+
     const getUsers=()=>{
-    if (usersPage.users.length ===0) {
+    if (props.users.length ===0) {
 
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {debugger
-        dispatch(SetUsersAC(
-           response.data.items))
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+        props.setUsers(response.data.items)
         })
     }}
-
     return (
         <div>
             <button onClick={getUsers}>get users</button>
-            {usersPage.users.map(el => {
+            {props.users.map(el => {
                 return (<div className={s.user} key={el.id}>
                         <span><img src={el.photos.small!=null? el.photos.small: userPhoto} className={s.photo}/></span>
                         <span>{el.name}</span> <span>{el.status}</span>
                         <div className={s.location}>{"el.location.city"} {"el.location.country"}</div>
                         {el.followed
                             ? <div>
-                                <button onClick={()=>dispatch(UnFollowAC(el.id))}>unfollowed</button>
+                                <button onClick={()=>props.unfollow(el.id)}>unfollowed</button>
                             </div>
                             : <div>
-                                <button onClick={()=>dispatch(FollowAC(el.id))}>followed</button>
+                                <button onClick={()=>props.follow(el.id)}>followed</button>
                             </div>}
 
 
