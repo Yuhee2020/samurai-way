@@ -4,7 +4,10 @@ import {ActionsTypes, PostType, ProfilePageType} from "./store";
  export type UserType={
     id:string
     followed:boolean
-    photo:string
+    photos:{
+        small:string
+        large:string
+    }
     name:string
     status:string
     location:{
@@ -17,24 +20,27 @@ export type UsersPageType={
      users:UserType[]
 }
 
-let initialState={
+let initialState:UsersPageType={
     users: [
-        {id: v1(), followed:true, photo:"https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/streams/2012/September/120920/1B3916437-oom-110518-depp-10a.jpg",
-            name: "Andrew", status: "OOo tonight, you kill me with your smile", location:{city: "Brest", country:"Belarus"}},
-        {id: v1(), followed:false, photo:"https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/streams/2012/September/120920/1B3916437-oom-110518-depp-10a.jpg",
-            name: "Baton", status: "So beautiful an wild", location:{city: "Kobrin", country:"Belarus"}},
-        {id: v1(), followed:true,photo:"https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/streams/2012/September/120920/1B3916437-oom-110518-depp-10a.jpg",
-            name: "Dima", status: "I am konik", location:{city: "Vilnia", country:"Litva"}},
+        // {id: v1(), followed:true, photo:"https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/streams/2012/September/120920/1B3916437-oom-110518-depp-10a.jpg",
+        //     name: "Andrew", status: "OOo tonight, you kill me with your smile", location:{city: "Brest", country:"Belarus"}},
+        // {id: v1(), followed:false, photo:"https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/streams/2012/September/120920/1B3916437-oom-110518-depp-10a.jpg",
+        //     name: "Baton", status: "So beautiful an wild", location:{city: "Kobrin", country:"Belarus"}},
+        // {id: v1(), followed:true,photo:"https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/streams/2012/September/120920/1B3916437-oom-110518-depp-10a.jpg",
+        //     name: "Dima", status: "I am konik", location:{city: "Vilnia", country:"Litva"}},
 
     ],
 }
-export const usersReducer=(state: UsersPageType=initialState, action: FollowACType | UnFollowACType):UsersPageType=>{
+export const usersReducer=(state: UsersPageType=initialState, action: FollowACType | UnFollowACType | SetUsersACType):UsersPageType=>{
     switch (action.type){
         case "FOLLOW":{
             return {...state, users:state.users.map(el=>el.id===action.userId?{...el,followed:true}:el)}
         }
         case "UNFOLLOW":{
             return {...state, users:state.users.map(el=>el.id===action.userId?{...el,followed:false}:el)}
+        }
+        case "SET-USERS":{
+            return {...state, users:action.users}
         }
         default: return state
     }
@@ -54,5 +60,13 @@ export const UnFollowAC=(userId:string)=>{
     return{
         type: "UNFOLLOW",
         userId
+    }as const
+}
+
+export type SetUsersACType=ReturnType<typeof SetUsersAC>
+export const SetUsersAC=(users:UserType[])=>{
+    return{
+        type: "SET-USERS",
+        users
     }as const
 }
