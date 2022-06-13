@@ -1,7 +1,14 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {ReducersStateType} from "../../redux/reduxStore";
-import {FollowAC, SetUsersAC, UnFollowAC, UserType} from "../../redux/usersReduser";
+import {
+    FollowAC,
+    GetTotalCountAC,
+    GetTotalCountACType,
+    SetUsersAC,
+    UnFollowAC,
+    UserType
+} from "../../redux/usersReduser";
 import {Users2} from "./Users2";
 import {Users} from "./Users";
 import {UsersC} from "./UsersC";
@@ -9,6 +16,7 @@ import {UsersC} from "./UsersC";
 
 export const UserContainer = () => {
     let users= useSelector<ReducersStateType, UserType[]>(state => state.usersPage.users)
+    let totalCount= useSelector<ReducersStateType, number[]>(state => state.usersPage.totalCount)
     let dispatch = useDispatch()
     const unfollow = (id: string) => {
         dispatch(UnFollowAC(id))
@@ -20,11 +28,17 @@ export const UserContainer = () => {
         dispatch(SetUsersAC(users))
     }
 
+    const GetTotalCount=(toalCount:number)=>{
+        dispatch(GetTotalCountAC(toalCount))
+    }
+
     return <>
         <UsersC users={users}
                unfollow={unfollow}
                follow={follow}
                setUsers={setUsers}
+                GetTotalCount={GetTotalCount}
+                totalCount={totalCount}
         />
     </>
 }
