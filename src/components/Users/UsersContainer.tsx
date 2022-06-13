@@ -3,6 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {ReducersStateType} from "../../redux/reduxStore";
 import {FollowAC, SetUsersAC, UnFollowAC, UserType} from "../../redux/usersReduser";
 import {Users2} from "./Users2";
+import {Users} from "./Users";
+import {UsersC} from "./UsersC";
 
 
 export const UserContainer = () => {
@@ -19,7 +21,7 @@ export const UserContainer = () => {
     }
 
     return <>
-        <Users2 users={users}
+        <UsersC users={users}
                unfollow={unfollow}
                follow={follow}
                setUsers={setUsers}

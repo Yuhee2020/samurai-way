@@ -30,6 +30,7 @@ let initialState:UsersPageType={
         //     name: "Dima", status: "I am konik", location:{city: "Vilnia", country:"Litva"}},
 
     ],
+
 }
 export const usersReducer=(state: UsersPageType=initialState, action: FollowACType | UnFollowACType | SetUsersACType):UsersPageType=>{
     switch (action.type){
@@ -40,8 +41,9 @@ export const usersReducer=(state: UsersPageType=initialState, action: FollowACTy
             return {...state, users:state.users.map(el=>el.id===action.userId?{...el,followed:false}:el)}
         }
         case "SET-USERS":{
-            return {...state, users:[...state.users, ...action.users]}
+            return {...state, users:action.users}
         }
+
         default: return state
     }
 }
