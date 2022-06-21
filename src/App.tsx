@@ -9,7 +9,7 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import s from "./components/Profile/Profile.module.css";
-import {UserContainer} from "./components/Users/UsersContainer";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 
 const App: React.FC=()=> {
@@ -24,7 +24,7 @@ const App: React.FC=()=> {
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/dialogs" element={<Dialogs/>}/>
                         <Route path="/news" element={<News/>}/>
-                        <Route path="/users" element={<UserContainer/>}/>
+                        <Route path="/users" element={<UsersContainer/>}/>
                         <Route path="/music" element={<Music/>}/>
                         <Route path="/settings" element={<Settings/>}/>
                         <Route path="/*" element={<div>404</div>}/>

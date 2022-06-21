@@ -16,6 +16,7 @@ export type UserType = {
 export type UsersPageType = {
     users: UserType[]
     totalCount: number[]
+    page: number
 }
 
 let initialState: UsersPageType = {
@@ -28,10 +29,11 @@ let initialState: UsersPageType = {
         //     name: "Dima", status: "I am konik", location:{city: "Vilnia", country:"Litva"}},
 
     ],
-    totalCount:[]
+    totalCount:[],
+    page:1
 
 }
-export const usersReducer = (state: UsersPageType = initialState, action: FollowACType | UnFollowACType | SetUsersACType | GetTotalCountACType): UsersPageType => {
+export const usersReducer = (state: UsersPageType = initialState, action: FollowACType | UnFollowACType | SetUsersACType | GetTotalCountACType | SetPageACType): UsersPageType => {
     switch (action.type) {
         case "FOLLOW": {
             return {...state, users: state.users.map(el => el.id === action.userId ? {...el, followed: true} : el)}
@@ -48,6 +50,10 @@ export const usersReducer = (state: UsersPageType = initialState, action: Follow
                 arr=[...arr, i]}
             debugger
             return {...state, totalCount:arr}
+
+        }
+        case "SET-PAGE" : {
+            return {...state,page:action.page}
 
         }
 
@@ -87,5 +93,13 @@ export const GetTotalCountAC = (totalCount: number) => {
     return {
         type: "GET-TOTAL-COUNT",
         totalCount
+    } as const
+}
+
+export type SetPageACType = ReturnType<typeof SetPageAC>
+export const SetPageAC = (page: number) => {
+    return {
+        type: "SET-PAGE",
+        page
     } as const
 }

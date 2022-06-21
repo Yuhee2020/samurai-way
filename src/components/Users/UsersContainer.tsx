@@ -4,7 +4,7 @@ import {ReducersStateType} from "../../redux/reduxStore";
 import {
     FollowAC,
     GetTotalCountAC,
-    GetTotalCountACType,
+    GetTotalCountACType, SetPageAC,
     SetUsersAC,
     UnFollowAC,
     UserType
@@ -14,9 +14,11 @@ import {Users} from "./Users";
 import {UsersC} from "./UsersC";
 
 
-export const UserContainer = () => {
+export const UsersContainer = () => {
     let users= useSelector<ReducersStateType, UserType[]>(state => state.usersPage.users)
     let totalCount= useSelector<ReducersStateType, number[]>(state => state.usersPage.totalCount)
+    let page= useSelector<ReducersStateType, number>(state => state.usersPage.page)
+
     let dispatch = useDispatch()
     const unfollow = (id: string) => {
         dispatch(UnFollowAC(id))
@@ -32,6 +34,10 @@ export const UserContainer = () => {
         dispatch(GetTotalCountAC(toalCount))
     }
 
+    const SetPage=(page:number)=>{
+        dispatch(SetPageAC(page))
+    }
+
     return <>
         <UsersC users={users}
                unfollow={unfollow}
@@ -39,6 +45,8 @@ export const UserContainer = () => {
                setUsers={setUsers}
                 GetTotalCount={GetTotalCount}
                 totalCount={totalCount}
+                SetPage={SetPage}
+                page={page}
         />
     </>
 }
