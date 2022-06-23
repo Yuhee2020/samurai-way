@@ -17,6 +17,7 @@ export type UsersPageType = {
     users: UserType[]
     totalCount: number[]
     page: number
+    loadingStatus: boolean
 }
 
 let initialState: UsersPageType = {
@@ -30,10 +31,11 @@ let initialState: UsersPageType = {
 
     ],
     totalCount:[],
-    page:1
+    page:1,
+    loadingStatus:true,
 
 }
-export const usersReducer = (state: UsersPageType = initialState, action: FollowACType | UnFollowACType | SetUsersACType | GetTotalCountACType | SetPageACType): UsersPageType => {
+export const usersReducer = (state: UsersPageType = initialState, action: TsarType): UsersPageType => {
     switch (action.type) {
         case "FOLLOW": {
             return {...state, users: state.users.map(el => el.id === action.userId ? {...el, followed: true} : el)}
@@ -56,12 +58,18 @@ export const usersReducer = (state: UsersPageType = initialState, action: Follow
             return {...state,page:action.page}
 
         }
+        case "CHANGE-LOADING-STATUS" : {
+            return {...state,loadingStatus:action.status}
+
+        }
 
 
         default:
             return state
     }
 }
+
+type TsarType=FollowACType | UnFollowACType | SetUsersACType | GetTotalCountACType | SetPageACType | ChangeLoadingStatusACType
 
 
 export type FollowACType = ReturnType<typeof FollowAC>
@@ -101,5 +109,13 @@ export const SetPageAC = (page: number) => {
     return {
         type: "SET-PAGE",
         page
+    } as const
+}
+
+export type ChangeLoadingStatusACType = ReturnType<typeof ChangeLoadingStatusAC>
+export const ChangeLoadingStatusAC = (status: boolean) => {
+    return {
+        type: "CHANGE-LOADING-STATUS",
+        status
     } as const
 }

@@ -2,15 +2,15 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {ReducersStateType} from "../../redux/reduxStore";
 import {
+    ChangeLoadingStatusAC,
+    ChangeLoadingStatusACType,
     FollowAC,
     GetTotalCountAC,
-    GetTotalCountACType, SetPageAC,
+    SetPageAC,
     SetUsersAC,
     UnFollowAC,
     UserType
 } from "../../redux/usersReduser";
-import {Users2} from "./Users2";
-import {Users} from "./Users";
 import {UsersC} from "./UsersC";
 
 
@@ -18,6 +18,7 @@ export const UsersContainer = () => {
     let users= useSelector<ReducersStateType, UserType[]>(state => state.usersPage.users)
     let totalCount= useSelector<ReducersStateType, number[]>(state => state.usersPage.totalCount)
     let page= useSelector<ReducersStateType, number>(state => state.usersPage.page)
+    let loadingStatus= useSelector<ReducersStateType, boolean>(state => state.usersPage.loadingStatus)
 
     let dispatch = useDispatch()
     const unfollow = (id: string) => {
@@ -30,12 +31,15 @@ export const UsersContainer = () => {
         dispatch(SetUsersAC(users))
     }
 
-    const GetTotalCount=(toalCount:number)=>{
-        dispatch(GetTotalCountAC(toalCount))
+    const getTotalCount=(totalCount:number)=>{
+        dispatch(GetTotalCountAC(totalCount))
     }
 
-    const SetPage=(page:number)=>{
+    const setPage=(page:number)=>{
         dispatch(SetPageAC(page))
+    }
+    const changeLoadingStatus=(status:boolean)=>{
+        dispatch(ChangeLoadingStatusAC(status))
     }
 
     return <>
@@ -43,10 +47,12 @@ export const UsersContainer = () => {
                unfollow={unfollow}
                follow={follow}
                setUsers={setUsers}
-                GetTotalCount={GetTotalCount}
+                getTotalCount={getTotalCount}
                 totalCount={totalCount}
-                SetPage={SetPage}
+                setPage={setPage}
                 page={page}
+                loadingStatus={loadingStatus}
+                changeLoadingStatus={changeLoadingStatus}
         />
     </>
 }

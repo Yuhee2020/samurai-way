@@ -3,7 +3,7 @@ import './App.css';
 import Header from "./components/Header/Header";
 import NaviBar from "./components/NaviBar/NaviBar";
 import Dialogs from "./components/Dialogs/Dialogs";
-import Profile from "./components/Profile/Profile";
+import {ProfileC} from "./components/Profile/ProfileC";
 import {Route, Routes} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
@@ -14,14 +14,13 @@ import {UsersContainer} from "./components/Users/UsersContainer";
 
 const App: React.FC=()=> {
     return (
-
             <div className="app-wrapper">
 
                 <Header/>
                 <NaviBar/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path="/profile" element={<Profile/>}/>
+                        <Route path="/profile/*" element={<ProfileC/>}/>
                         <Route path="/dialogs" element={<Dialogs/>}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/users" element={<UsersContainer/>}/>

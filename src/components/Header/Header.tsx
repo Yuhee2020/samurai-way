@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./Header.module.css";
 import logo from "./logo_size.jpg"
+import {Preloader} from "../common/preloader/Preloader";
 
 function Header() {
     return <header className={s.header}>
