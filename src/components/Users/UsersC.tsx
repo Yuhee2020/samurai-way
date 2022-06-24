@@ -17,6 +17,7 @@ type PropsType = {
     page: number
     loadingStatus: boolean
     changeLoadingStatus: (status: boolean) => void
+    setUserId:(id:number)=>void
 
 }
 
@@ -26,7 +27,6 @@ export class UsersC extends React.Component<PropsType> {
     componentDidMount() {
         this.props.changeLoadingStatus(true)
         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            debugger
             this.props.setUsers(response.data.items)
             this.props.getTotalCount(response.data.totalCount)
             this.props.changeLoadingStatus(false)
@@ -37,7 +37,6 @@ export class UsersC extends React.Component<PropsType> {
         this.props.changeLoadingStatus(true)
         this.props.setPage(page)
         axios.get("https://social-network.samuraijs.com/api/1.0/users?page=" + page).then(response => {
-            debugger
             this.props.setUsers(response.data.items)
             this.props.changeLoadingStatus(false)
 
@@ -51,14 +50,14 @@ export class UsersC extends React.Component<PropsType> {
             <div>
                 {this.props.loadingStatus && <Preloader/>}
                 {this.props.totalCount.slice(((this.props.page - 5) < 0 ? 0 : this.props.page - 5), this.props.page + 5).map(el => {
-                    return <span className={el == this.props.page ? s.page : ""}
+                    return <span key={el} className={el == this.props.page ? s.page : ""}
                                  onClick={() => this.checkPage(el)}> {el} </span>
                 })}
 
                 {this.props.users.map(el => {
                     return (<div className={s.user} key={el.id}>
-                            <NavLink to={"/profile/" + el.id}><span><img src={el.photos.small != null ? el.photos.small : userPhoto}
-                                          className={s.photo}/></span>
+                            <NavLink onClick={()=>this.props.setUserId(Number(el.id))} to={"/profile/" + el.id}><span><img src={el.photos.small != null ? el.photos.small : userPhoto}
+                                                                                                                           className={s.photo}/></span>
                                 <span>{el.name}</span> <span>{el.status}</span></NavLink>
                             <div className={s.location}>{"el.location.city"} {"el.location.country"}</div>
                             {el.followed
@@ -72,7 +71,7 @@ export class UsersC extends React.Component<PropsType> {
                     )
                 })}
                 {this.props.totalCount.slice(((this.props.page - 5) < 0 ? 0 : this.props.page - 5), this.props.page + 5).map(el => {
-                    return <span className={el == this.props.page ? s.page : ""}
+                    return <span key={el} className={el == this.props.page ? s.page : ""}
                                  onClick={() => this.checkPage(el)}> {el} </span>
                 })}
             </div>

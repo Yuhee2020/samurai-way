@@ -18,6 +18,7 @@ export type UsersPageType = {
     totalCount: number[]
     page: number
     loadingStatus: boolean
+    userId: number
 }
 
 let initialState: UsersPageType = {
@@ -30,9 +31,10 @@ let initialState: UsersPageType = {
         //     name: "Dima", status: "I am konik", location:{city: "Vilnia", country:"Litva"}},
 
     ],
-    totalCount:[],
-    page:1,
-    loadingStatus:true,
+    totalCount: [],
+    page: 1,
+    loadingStatus: true,
+    userId: 2
 
 }
 export const usersReducer = (state: UsersPageType = initialState, action: TsarType): UsersPageType => {
@@ -47,29 +49,41 @@ export const usersReducer = (state: UsersPageType = initialState, action: TsarTy
             return {...state, users: action.users}
         }
         case "GET-TOTAL-COUNT": {
-            let arr:number[]=[]
-            for (let i=1; i<=Math.ceil(action.totalCount/10); i++){
-                arr=[...arr, i]}
-            debugger
-            return {...state, totalCount:arr}
+            let arr: number[] = []
+            for (let i = 1; i <= Math.ceil(action.totalCount / 10); i++) {
+                arr = [...arr, i]
+            }
+            return {...state, totalCount: arr}
 
         }
         case "SET-PAGE" : {
-            return {...state,page:action.page}
+            return {...state, page: action.page}
 
         }
         case "CHANGE-LOADING-STATUS" : {
-            return {...state,loadingStatus:action.status}
+            return {...state, loadingStatus: action.status}
 
         }
+        case "SET-USER-ID" : {
 
+            return {...state, userId:action.id}
+
+
+        }
 
         default:
             return state
     }
 }
 
-type TsarType=FollowACType | UnFollowACType | SetUsersACType | GetTotalCountACType | SetPageACType | ChangeLoadingStatusACType
+type TsarType =
+    FollowACType
+    | UnFollowACType
+    | SetUsersACType
+    | GetTotalCountACType
+    | SetPageACType
+    | ChangeLoadingStatusACType
+    | SetUIdACType
 
 
 export type FollowACType = ReturnType<typeof FollowAC>
@@ -117,5 +131,13 @@ export const ChangeLoadingStatusAC = (status: boolean) => {
     return {
         type: "CHANGE-LOADING-STATUS",
         status
+    } as const
+}
+
+export type SetUIdACType = ReturnType<typeof SetUIdAC>
+export const SetUIdAC = (id: number) => {
+    return {
+        type: "SET-USER-ID",
+        id
     } as const
 }

@@ -6,7 +6,7 @@ import {
     ChangeLoadingStatusACType,
     FollowAC,
     GetTotalCountAC,
-    SetPageAC,
+    SetPageAC, SetUIdAC,
     SetUsersAC,
     UnFollowAC,
     UserType
@@ -41,6 +41,9 @@ export const UsersContainer = () => {
     const changeLoadingStatus=(status:boolean)=>{
         dispatch(ChangeLoadingStatusAC(status))
     }
+    const setUserId=(id:number)=>{
+        dispatch(SetUIdAC(id))
+    }
 
     return <>
         <UsersC users={users}
@@ -53,6 +56,7 @@ export const UsersContainer = () => {
                 page={page}
                 loadingStatus={loadingStatus}
                 changeLoadingStatus={changeLoadingStatus}
+                setUserId={setUserId}
         />
     </>
 }

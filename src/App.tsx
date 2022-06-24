@@ -10,6 +10,7 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import s from "./components/Profile/Profile.module.css";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import {ProfileCContainer} from "./components/Profile/ProfileCContainer";
 
 
 const App: React.FC=()=> {
@@ -20,7 +21,7 @@ const App: React.FC=()=> {
                 <NaviBar/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path="/profile/*" element={<ProfileC/>}/>
+                        <Route path="profile/:Id" element={<ProfileCContainer/>}/>
                         <Route path="/dialogs" element={<Dialogs/>}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/users" element={<UsersContainer/>}/>
