@@ -17,7 +17,7 @@ type PropsType = {
     page: number
     loadingStatus: boolean
     changeLoadingStatus: (status: boolean) => void
-    setUserId:(id:number)=>void
+    setUserId: (id: number) => void
 
 }
 
@@ -26,7 +26,7 @@ export class UsersC extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.changeLoadingStatus(true)
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users", {withCredentials:true}).then(response => {
             this.props.setUsers(response.data.items)
             this.props.getTotalCount(response.data.totalCount)
             this.props.changeLoadingStatus(false)
@@ -36,7 +36,7 @@ export class UsersC extends React.Component<PropsType> {
     checkPage = (page: number) => {
         this.props.changeLoadingStatus(true)
         this.props.setPage(page)
-        axios.get("https://social-network.samuraijs.com/api/1.0/users?page=" + page).then(response => {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users?page=" + page,{withCredentials:true}).then(response => {
             this.props.setUsers(response.data.items)
             this.props.changeLoadingStatus(false)
 
@@ -56,16 +56,41 @@ export class UsersC extends React.Component<PropsType> {
 
                 {this.props.users.map(el => {
                     return (<div className={s.user} key={el.id}>
-                            <NavLink onClick={()=>this.props.setUserId(Number(el.id))} to={"/profile/" + el.id}><span><img src={el.photos.small != null ? el.photos.small : userPhoto}
-                                                                                                                           className={s.photo}/></span>
+                            <NavLink onClick={() => this.props.setUserId(Number(el.id))} to={"/profile/" + el.id}><span><img
+                                src={el.photos.small != null ? el.photos.small : userPhoto}
+                                className={s.photo}/></span>
                                 <span>{el.name}</span> <span>{el.status}</span></NavLink>
                             <div className={s.location}>{"el.location.city"} {"el.location.country"}</div>
                             {el.followed
                                 ? <div>
-                                    <button onClick={() => this.props.unfollow(el.id)}>unfollowed</button>
+                                    <button
+                                        onClick={() => axios.delete("https://social-network.samuraijs.com/api/1.0/follow/" + el.id,
+                                            {
+                                                withCredentials: true,
+                                                headers: {
+                                                    "API-KEY": "68557ad3-b9a8-4dd0-9b3d-e2fde40e12b8"
+                                                }
+                                            }).then(response => {
+                                            response.data.resultCode === 0 &&
+                                            this.props.unfollow(el.id)
+                                        })
+                                        }>unfollowed
+                                    </button>
                                 </div>
                                 : <div>
-                                    <button onClick={() => this.props.follow(el.id)}>followed</button>
+                                    <button onClick={() => {
+                                        axios.post("https://social-network.samuraijs.com/api/1.0/follow/" + el.id, {}, {
+                                            withCredentials: true,
+                                            headers: {
+                                                "API-KEY": "68557ad3-b9a8-4dd0-9b3d-e2fde40e12b8"
+                                            }
+                                        }).then(response => {
+                                            response.data.resultCode === 0 &&
+                                            this.props.follow(el.id)
+                                        })
+                                    }}>
+                                        followed
+                                    </button>
                                 </div>}
                         </div>
                     )

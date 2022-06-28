@@ -10,7 +10,7 @@ type PropsType = {
     authData: AuthType
 }
 
-export class HeaderC extends React.Component<PropsType> {
+export class  HeaderC extends React.Component<PropsType> {
 
     componentDidMount() {
         axios.get("https://social-network.samuraijs.com/api/1.0/auth/me", {
