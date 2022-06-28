@@ -5,8 +5,6 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {ProfileType} from "../../redux/profileReducer";
 import axios from "axios";
 import {Preloader} from "../common/preloader/Preloader";
-import {Params} from "react-router-dom";
-import {ParamsType} from "./ProfileCContainer";
 
 type PropsType = {
     profile:ProfileType
