@@ -1,9 +1,9 @@
 import React from "react";
 import s from "./Header.module.css";
 import logo from "./logo_size.jpg"
-import axios from "axios";
 import {NavLink} from "react-router-dom";
 import {AuthType, UserDataType} from "../../redux/authReducer";
+import {authAPI} from "../../api/api";
 
 type PropsType = {
     setUserData: (data: UserDataType) => void
@@ -13,11 +13,8 @@ type PropsType = {
 export class  HeaderC extends React.Component<PropsType> {
 
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/auth/me", {
-            withCredentials: true
-
-        }).then(response => {
-            this.props.setUserData(response.data.data)
+        authAPI.authMe().then(response => {
+            this.props.setUserData(response.data)
 
         })
     }

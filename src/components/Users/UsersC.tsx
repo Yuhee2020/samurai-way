@@ -1,10 +1,10 @@
 import React from "react";
 import {UserType} from "../../redux/usersReduser";
 import s from "./Users.module.css"
-import axios from "axios";
 import userPhoto from "../../images/1B3916437-oom-110518-depp-10a.webp"
 import {Preloader} from "../common/preloader/Preloader";
 import {NavLink} from "react-router-dom";
+import {FollowUnFollowAPI, getUsersAPI} from "../../api/api";
 
 type PropsType = {
     users: UserType[]
@@ -26,9 +26,9 @@ export class UsersC extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.changeLoadingStatus(true)
-        axios.get("https://social-network.samuraijs.com/api/1.0/users", {withCredentials:true}).then(response => {
-            this.props.setUsers(response.data.items)
-            this.props.getTotalCount(response.data.totalCount)
+        getUsersAPI.getUsers(null).then(response => {
+            this.props.setUsers(response.items)
+            this.props.getTotalCount(response.totalCount)
             this.props.changeLoadingStatus(false)
         })
     }
@@ -36,8 +36,8 @@ export class UsersC extends React.Component<PropsType> {
     checkPage = (page: number) => {
         this.props.changeLoadingStatus(true)
         this.props.setPage(page)
-        axios.get("https://social-network.samuraijs.com/api/1.0/users?page=" + page,{withCredentials:true}).then(response => {
-            this.props.setUsers(response.data.items)
+        getUsersAPI.getUsers(page).then(response => {
+            this.props.setUsers(response.items)
             this.props.changeLoadingStatus(false)
 
 
@@ -63,30 +63,25 @@ export class UsersC extends React.Component<PropsType> {
                             <div className={s.location}>{"el.location.city"} {"el.location.country"}</div>
                             {el.followed
                                 ? <div>
-                                    <button
-                                        onClick={() => axios.delete("https://social-network.samuraijs.com/api/1.0/follow/" + el.id,
-                                            {
-                                                withCredentials: true,
-                                                headers: {
-                                                    "API-KEY": "68557ad3-b9a8-4dd0-9b3d-e2fde40e12b8"
-                                                }
-                                            }).then(response => {
-                                            response.data.resultCode === 0 &&
-                                            this.props.unfollow(el.id)
-                                        })
+                                    <button disabled={this.props.loadingStatus}
+                                        onClick={() => {
+                                            this.props.changeLoadingStatus(true)
+                                            FollowUnFollowAPI.deleteFollow(el.id).then(response => {
+                                                response.resultCode === 0 &&
+                                                this.props.unfollow(el.id)
+                                                this.props.changeLoadingStatus(false)
+                                            })
+                                        }
                                         }>unfollowed
                                     </button>
                                 </div>
                                 : <div>
-                                    <button onClick={() => {
-                                        axios.post("https://social-network.samuraijs.com/api/1.0/follow/" + el.id, {}, {
-                                            withCredentials: true,
-                                            headers: {
-                                                "API-KEY": "68557ad3-b9a8-4dd0-9b3d-e2fde40e12b8"
-                                            }
-                                        }).then(response => {
-                                            response.data.resultCode === 0 &&
+                                    <button disabled={this.props.loadingStatus} onClick={() => {
+                                        this.props.changeLoadingStatus(true)
+                                        FollowUnFollowAPI.postFollow(el.id).then(response => {
+                                            response.resultCode === 0 &&
                                             this.props.follow(el.id)
+                                            this.props.changeLoadingStatus(false)
                                         })
                                     }}>
                                         followed

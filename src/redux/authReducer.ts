@@ -16,7 +16,7 @@ const initialState: AuthType = {
 export const authReducer = (state: AuthType = initialState, action: TsarType): AuthType => {
     switch (action.type) {
         case "SET_USER_DATA": {
-            return {...state,data:action.data, loginStatus:true}
+            return {...state, data:action.data, loginStatus:true}
 
         }
 
