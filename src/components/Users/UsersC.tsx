@@ -44,15 +44,19 @@ export class UsersC extends React.Component<PropsType> {
         })
     }
 
+    pagination = () => {
+        return this.props.totalCount.slice(((this.props.page - 5) < 0 ? 0 : this.props.page - 5), this.props.page + 5).map(el => {
+            return <span key={el} className={el == this.props.page ? s.page : ""}
+                         onClick={() => this.checkPage(el)}> {el} </span>
+        })
+    }
+
 
     render() {
         return (
             <div>
                 {this.props.loadingStatus && <Preloader/>}
-                {this.props.totalCount.slice(((this.props.page - 5) < 0 ? 0 : this.props.page - 5), this.props.page + 5).map(el => {
-                    return <span key={el} className={el == this.props.page ? s.page : ""}
-                                 onClick={() => this.checkPage(el)}> {el} </span>
-                })}
+                {this.pagination()}
 
                 {this.props.users.map(el => {
                     return (<div className={s.user} key={el.id}>
@@ -64,19 +68,19 @@ export class UsersC extends React.Component<PropsType> {
                             {el.followed
                                 ? <div>
                                     <button disabled={this.props.loadingStatus}
-                                        onClick={() => {
-                                            this.props.changeLoadingStatus(true)
-                                            FollowUnFollowAPI.deleteFollow(el.id).then(response => {
-                                                response.resultCode === 0 &&
-                                                this.props.unfollow(el.id)
-                                                this.props.changeLoadingStatus(false)
-                                            })
-                                        }
-                                        }>unfollowed
+                                            onClick={() => {
+                                                this.props.changeLoadingStatus(true)
+                                                FollowUnFollowAPI.deleteFollow(el.id).then(response => {
+                                                    response.resultCode === 0 &&
+                                                    this.props.unfollow(el.id)
+                                                    this.props.changeLoadingStatus(false)
+                                                })
+                                            }
+                                            }>unfollowed
                                     </button>
                                 </div>
                                 : <div>
-                                    <button disabled={this.props.loadingStatus} onClick={() => {
+                                    <button disabled={this.props.loadingStatus } onClick={() => {
                                         this.props.changeLoadingStatus(true)
                                         FollowUnFollowAPI.postFollow(el.id).then(response => {
                                             response.resultCode === 0 &&
@@ -90,10 +94,7 @@ export class UsersC extends React.Component<PropsType> {
                         </div>
                     )
                 })}
-                {this.props.totalCount.slice(((this.props.page - 5) < 0 ? 0 : this.props.page - 5), this.props.page + 5).map(el => {
-                    return <span key={el} className={el == this.props.page ? s.page : ""}
-                                 onClick={() => this.checkPage(el)}> {el} </span>
-                })}
+                {this.pagination()}
             </div>
         )
     }
